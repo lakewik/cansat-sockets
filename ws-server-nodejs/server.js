@@ -14,6 +14,7 @@ wss.on('connection', function (ws) {
     pressure: "1000 hPa",
     humidity: "30%",
     height: "1000 m",
+	  orientation: "10",
     
 };
     ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
