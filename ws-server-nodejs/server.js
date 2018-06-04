@@ -34,12 +34,17 @@ wss.on('connection', function (ws) {
    ws.on('message', function incoming (eventmsg){
 	   // liczymy prędkość z akceleracji
 	   // |v| = ABS(SQRT(POW(Vx) + POW(Vy) + POW(Vz)))
-	    var msg = {
+	   // liczyly pitch i roll
+	   var pitchC = (Math.atan2(R_x,Math.sqrt(R_y*R_y+R_z*R_z)) * 180.0) / Math.PI;
+	   var rollC = (Marh.atan2(R_y,(Math.sqrt(R_x*R_x+R_z*R_z))) * 180.0) / Math.PI;
+	   var msg = {
     			temperature: "20.30",
     			pressure: "1000",
     			humidity: "30%",
 		        lightlevel: "1000",
     			height: "1000 m",
+		   	pitch: pitchC,
+		   	roll: rollC,
 		   	speed: speed_calculated,
 	  		orientation: {
 				x: "40",
