@@ -10,12 +10,15 @@ var wss = new WebSocketServer({server: server});
 wss.on('connection', function (ws) {
   var id = setInterval(function () {
   var msg = {
-    temperature: "020.30",
+    temperature: "20.30",
     pressure: "1000 hPa",
     humidity: "30%",
     height: "1000 m",
-	  orientation: "10",
+	  orientationx: "40",
+          orientationy: "45",
+          orientationx: "20",
     
+
 };
     ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
   }, 100);
