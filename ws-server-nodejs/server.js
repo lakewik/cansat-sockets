@@ -8,7 +8,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 var wss = new WebSocketServer({server: server});
 wss.on('connection', function (ws) {
-  var id = setInterval(function () {
+ /*
+	var id = setInterval(function () {
   var msg = {
     temperature: "20.30",
     pressure: "1000 hPa",
@@ -20,13 +21,33 @@ wss.on('connection', function (ws) {
     
 
 };
-    ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
+    ws.send(JSON.stringify(msg), function () { /* ignore errors  });
+
   }, 100);
+*/
   console.log('started client interval');
   ws.on('close', function () {
     console.log('stopping client interval');
     clearInterval(id);
   });
+	
+   ws.on('message', function incoming (eventmsg){
+	   // liczymy prędkość z akceleracji
+	   // |v| = ABS(SQRT(POW(Vx) + POW(Vy) + POW(Vz)))
+	    var msg = {
+    			temperature: "20.30",
+    			pressure: "1000",
+    			humidity: "30%",
+		        lightlevel: "1000",
+    			height: "1000 m",
+		   	speed: speed_calculated,
+	  		orientation: {
+				x: "40",
+				y: "45",
+				z: "20"
+			}
+	    };   
+   });
 });
 
 server.on('request', app);
