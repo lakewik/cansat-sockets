@@ -45,6 +45,7 @@ wss.on('connection', function (ws) {
     			height: "1000 m",
 		   	pitch: pitchC,
 		   	roll: rollC,
+		   	cputemp: cputempR,
 		   	speed: speed_calculated,
 	  		orientation: {
 				x: "40",
