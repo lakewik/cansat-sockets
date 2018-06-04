@@ -53,6 +53,8 @@ wss.on('connection', function (ws) {
 				z: "20"
 			}
 	    };   
+	   
+	   ws.send(JSON.stringify(msg), function () { /* ignore errors  });
    });
 });
 
