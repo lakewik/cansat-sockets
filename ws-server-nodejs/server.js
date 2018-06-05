@@ -1,4 +1,4 @@
-var WebSocketServer = require('./index.js').Server;
+﻿var WebSocketServer = require('./index.js').Server;
 var express = require('express');
 var path = require('path');
 var app = express();
@@ -32,8 +32,9 @@ wss.on('connection', function (ws) {
   });
 	
    ws.on('message', function incoming (eventmsg){
+	   // TEMP1|TEMP2|TEMP3|COMPASS|PRESSURE|HUMIDITY|LIGHT|CPUTEMP|ACCX|ACCY|ACCZ|COMPASSX|COMPASSY|COMPASSZ
 	   // liczymy prędkość z akceleracji
-	   // |v| = ABS(SQRT(POW(Vx) + POW(Vy) + POW(Vz)))
+	   // |v| = SQRT(POW(Vx) + POW(Vy) + POW(Vz))
 	   // liczyly pitch i roll
 	   var pitchC = (Math.atan2(R_x,Math.sqrt(R_y*R_y+R_z*R_z)) * 180.0) / Math.PI;
 	   var rollC = (Marh.atan2(R_y,(Math.sqrt(R_x*R_x+R_z*R_z))) * 180.0) / Math.PI;
@@ -47,11 +48,18 @@ wss.on('connection', function (ws) {
 		   	roll: rollC,
 		   	cputemp: cputempR,
 		   	speed: speed_calculated,
+			compass: compass,
 	  		orientation: {
 				x: "40",
 				y: "45",
 				z: "20"
+			},
+			acceleration: {
+				x: "40",
+				y: "45",
+				z: "20"
 			}
+			
 	    };   
 	   
 	   ws.send(JSON.stringify(msg), function () { /* ignore errors  });
