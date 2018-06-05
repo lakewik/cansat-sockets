@@ -32,7 +32,7 @@ wss.on('connection', function (ws) {
   });
 	
    ws.on('message', function incoming (eventmsg){
-	   // TEMP1|TEMP2|TEMP3|COMPASS|PRESSURE|HUMIDITY|LIGHT|CPUTEMP|ACCX|ACCY|ACCZ|COMPASSX|COMPASSY|COMPASSZ
+	   // TEMP1|TEMP2|TEMP3|COMPASS|PRESSURE|HUMIDITY|LIGHT|CPUTEMP|ACCX|ACCY|ACCZ|COMPASSX|COMPASSY|COMPASSZ|ALTITUDE_BMP280
 	   // liczymy prędkość z akceleracji
 	   // |v| = SQRT(POW(Vx) + POW(Vy) + POW(Vz))
 	   // liczyly pitch i roll
