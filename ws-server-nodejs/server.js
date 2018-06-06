@@ -33,7 +33,7 @@ var lastHeight;
 var currHeight;
 var currSpeed;
    ws.on('message', function incoming (eventmsg){
-	   // TEMP1|TEMP2|TEMP3|COMPASS|PRESSURE|HUMIDITY|LIGHT|CPUTEMP|ACCX|ACCY|ACCZ|COMPASSX|COMPASSY|COMPASSZ|ALTITUDE_BMP280
+	   // TEMP1|TEMP2|TEMP3|COMPASS|PRESSURE|HUMIDITY|LIGHT|CPUTEMP|ACCX|ACCY|ACCZ|COMPASSX|COMPASSY|COMPASSZ|ALTITUDE_BMP280|HEIGHT
 	   // liczymy prędkość z akceleracji
 	   // |v| = SQRT(POW(Vx) + POW(Vy) + POW(Vz))
 	   // liczyly pitch i roll
@@ -47,6 +47,7 @@ var currSpeed;
 	   
 	   var splittedMessage = eventmsg.split("|");
 	   currHeight = splittedMessage[14];
+	   currSpeedR = splittedMessgae[15];
 	   console.log(currHeight + "kotek" + lastHeight);
 	   currSpeed = currHeight - lastHeight;
 	   var msg = {
@@ -71,7 +72,7 @@ var currSpeed;
 				y: splittedMessage[9],
 				z: splittedMessage[10]
 			},
-		   	speed: currSpeed
+		   	speed: currSpeedR
 			
 	    };   
 	  lastHeight = splittedMessage[14];
