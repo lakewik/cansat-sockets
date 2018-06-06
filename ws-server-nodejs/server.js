@@ -64,7 +64,7 @@ wss.on('connection', function (ws) {
 			
 	    };   
 	   
-	   ws.send(JSON.stringify(msg), function () { /* ignore errors  });
+	   ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
    });
 });
 
