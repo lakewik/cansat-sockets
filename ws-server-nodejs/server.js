@@ -26,7 +26,7 @@ wss.on('connection', function (ws) {
   console.log('started client interval');
   ws.on('close', function () {
     console.log('stopping client interval');
-    clearInterval(id);
+    //clearInterval(id);
   });
 	
 var lastHeight;
@@ -46,7 +46,8 @@ var currSpeed;
 	   var rollC = 1;
 	   
 	   var splittedMessage = eventmsg.split("|");
-	   var currHeight = splittedMessage[14];
+	   currHeight = splittedMessage[14];
+	   console.log(currHeight + "kotek" + lastHeight);
 	   currSpeed = currHeight - lastHeight;
 	   var msg = {
     			temperature1: splittedMessage[0],
@@ -73,7 +74,7 @@ var currSpeed;
 		   	speed: currSpeed
 			
 	    };   
-	  var lastHeight = splittedMessage[14];
+	  lastHeight = splittedMessage[14];
 	   
 	   
 	   ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
