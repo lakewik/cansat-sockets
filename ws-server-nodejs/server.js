@@ -36,26 +36,30 @@ wss.on('connection', function (ws) {
 	   // liczyly pitch i roll
 	   var pitchC = (Math.atan2(R_x,Math.sqrt(R_y*R_y+R_z*R_z)) * 180.0) / Math.PI;
 	   var rollC = (Marh.atan2(R_y,(Math.sqrt(R_x*R_x+R_z*R_z))) * 180.0) / Math.PI;
+	   //var currentHeight = calcHeight();
+	   var splittedMessage = eventmsg.split("|");
 	   var msg = {
-    			temperature: "20.30",
-    			pressure: "1000",
-    			humidity: "30%",
-		        lightlevel: "1000",
-    			height: "1000 m",
+    			temperature1: splittedMessage[0],
+		   	temperature2: splittedMessage[1],
+		        temperature3: splittedMessage[2],
+    			pressure: splittedMessage[4],
+    			humidity: splittedMessage[5],
+		        lightlevel: splittedMessage[6],
+    			height: splittedMessage[14],
 		   	pitch: pitchC,
 		   	roll: rollC,
-		   	cputemp: cputempR,
+		   	cputemp: splittedMessage[7],
 		   	speed: speed_calculated,
-			compass: compass,
+			compass: splittedMessage[3],
 	  		orientation: {
-				x: "40",
-				y: "45",
-				z: "20"
+				x: splittedMessage[11],
+				y: splittedMessage[12],
+				z: splittedMessage[13]
 			},
 			acceleration: {
-				x: "40",
-				y: "45",
-				z: "20"
+				x: splittedMessage[8],
+				y: splittedMessage[9],
+				z: splittedMessage[10]
 			}
 			
 	    };   
