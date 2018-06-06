@@ -79,6 +79,6 @@ var currSpeed;
 });
 
 server.on('request', app);
-server.listen(8080, function () {
+server.listen(7777, function () {
   console.log('Listening on http://localhost:7777');
 });
