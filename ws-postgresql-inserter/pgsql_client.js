@@ -17,7 +17,8 @@ const pool = new Pool({
  
 ws.on('message', function incoming(data) {
   console.log(data);
-  pool.query('INSERT INTO', (err, res) => {
+  // insert temperatures
+  pool.query('INSERT INTO temperature (temp1, temp2, temp3, tempcpu) VALUES ('+data.temperature1+","+data.temperature2+','+data.temperature3+')', (err, res) => {
     console.log(err, res)
     pool.end()
   })
