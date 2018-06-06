@@ -29,14 +29,21 @@ wss.on('connection', function (ws) {
     clearInterval(id);
   });
 	
+var lastHeight;
+var currHeight;
+var currSpeed;
    ws.on('message', function incoming (eventmsg){
 	   // TEMP1|TEMP2|TEMP3|COMPASS|PRESSURE|HUMIDITY|LIGHT|CPUTEMP|ACCX|ACCY|ACCZ|COMPASSX|COMPASSY|COMPASSZ|ALTITUDE_BMP280
 	   // liczymy prędkość z akceleracji
 	   // |v| = SQRT(POW(Vx) + POW(Vy) + POW(Vz))
 	   // liczyly pitch i roll
-	   var pitchC = (Math.atan2(R_x,Math.sqrt(R_y*R_y+R_z*R_z)) * 180.0) / Math.PI;
-	   var rollC = (Marh.atan2(R_y,(Math.sqrt(R_x*R_x+R_z*R_z))) * 180.0) / Math.PI;
+	   //var pitchC = (Math.atan2(R_x,Math.sqrt(R_y*R_y+R_z*R_z)) * 180.0) / Math.PI;
+	   //var rollC = (Marh.atan2(R_y,(Math.sqrt(R_x*R_x+R_z*R_z))) * 180.0) / Math.PI;
 	   //var currentHeight = calcHeight();
+	   // speed calculation - methode 1 in server
+	   
+	   var currHeight = splittedMessage[14];
+	   currSpeed = currHeight - lastHeight;
 	   var splittedMessage = eventmsg.split("|");
 	   var msg = {
     			temperature1: splittedMessage[0],
@@ -60,9 +67,12 @@ wss.on('connection', function (ws) {
 				x: splittedMessage[8],
 				y: splittedMessage[9],
 				z: splittedMessage[10]
-			}
+			},
+		   	speed: currSpeed
 			
 	    };   
+	  var lastHeight = splittedMessage[14];
+	   
 	   
 	   ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
    });
