@@ -42,9 +42,9 @@ var currSpeed;
 	   //var currentHeight = calcHeight();
 	   // speed calculation - methode 1 in server
 	   
+	   var splittedMessage = eventmsg.split("|");
 	   var currHeight = splittedMessage[14];
 	   currSpeed = currHeight - lastHeight;
-	   var splittedMessage = eventmsg.split("|");
 	   var msg = {
     			temperature1: splittedMessage[0],
 		   	temperature2: splittedMessage[1],
