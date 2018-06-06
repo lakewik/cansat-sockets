@@ -42,6 +42,9 @@ var currSpeed;
 	   //var currentHeight = calcHeight();
 	   // speed calculation - methode 1 in server
 	   
+	   var pitchC = 1;
+	   var rollC = 1;
+	   
 	   var splittedMessage = eventmsg.split("|");
 	   var currHeight = splittedMessage[14];
 	   currSpeed = currHeight - lastHeight;
@@ -56,7 +59,6 @@ var currSpeed;
 		   	pitch: pitchC,
 		   	roll: rollC,
 		   	cputemp: splittedMessage[7],
-		   	speed: speed_calculated,
 			compass: splittedMessage[3],
 	  		orientation: {
 				x: splittedMessage[11],
