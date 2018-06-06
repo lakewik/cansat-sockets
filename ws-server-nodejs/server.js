@@ -7,24 +7,22 @@ var server = require('http').createServer();
 app.use(express.static(path.join(__dirname, '/public')));
 
 var wss = new WebSocketServer({server: server});
+
+function calcHeight() {
+	var T = 293.15;
+	var u = 0.028944;
+	var R = 8.31;
+	var g = 9.81;
+	
+	var po = 100865;
+	var p = 97846;
+	
+	var finalHeight = ((R*T)/(g*u)) * Math.log(parseFloat(p)/parseFloat(po));
+	
+	return finalHeight;
+}
+
 wss.on('connection', function (ws) {
- /*
-	var id = setInterval(function () {
-  var msg = {
-    temperature: "20.30",
-    pressure: "1000 hPa",
-    humidity: "30%",
-    height: "1000 m",
-	  orientationx: "40",
-          orientationy: "45",
-          orientationx: "20",
-    
-
-};
-    ws.send(JSON.stringify(msg), function () { /* ignore errors  });
-
-  }, 100);
-*/
   console.log('started client interval');
   ws.on('close', function () {
     console.log('stopping client interval');
