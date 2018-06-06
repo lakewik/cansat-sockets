@@ -47,7 +47,7 @@ var currSpeed;
 	   
 	   var splittedMessage = eventmsg.split("|");
 	   currHeight = splittedMessage[14];
-	   currSpeedR = splittedMessgae[15];
+	   currSpeedR = splittedMessage[15];
 	   console.log(currHeight + "kotek" + lastHeight);
 	   currSpeed = currHeight - lastHeight;
 	   var msg = {
