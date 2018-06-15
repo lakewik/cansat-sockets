@@ -4,33 +4,36 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
-const ws = new WebSocket('ws://localhost:7777');
+const ws = new WebSocket('ws://192.168.43.183:7777');
 
 ws.on('open', function open() {
+  console.log("opened");
 });
 
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'cansat',
+  database: 'cansat_testing',
   password: 'kotek',
-  port: 3211,
+  port: 5432,
 });
 
 ws.on('connection', function (ws) {
   console.log('started client interval');
+  });
   ws.on('close', function () {
     console.log('stopping client interval');
     //clearInterval(id);
   });
- 
+
 ws.on('message', function incoming(data) {
   console.log(data);
   // insert temperatures
-  pool.query('INSERT INTO temperature (temp1, temp2, temp3, tempcpu, date) VALUES ('+data.temperature1+','+data.temperature2+','+data.temperature3+', current_timestamp)', (err, res) => {
+  pool.query('INSERT INTO "temperature" (temp1, temp2, temp3, tempcpu, date) VALUES ('+data.temperature1+','+data.temperature2+','+data.temperature3+', current_timestamp)', (err, res) => {
     console.log(err, res);
     pool.end();
   });
+  /*
  // insert RSSI
  pool.query('INSERT INTO rssi (value, date) VALUES ('+data.rssi+', current_timestamp)', (err, res) => {
     console.log(err, res);
@@ -48,6 +51,8 @@ ws.on('message', function incoming(data) {
     console.log(err, res);
     pool.end();
   });
+  */
+  /*
  pool.query('INSERT INTO acceleration (accelerationx, accelerationy, accelerationz, acceleration, date) VALUES ('+data.acceleration.x+','+data.acceleration.y+','+data.acceleration.z+','+data.acceleration+', current_timestamp)', (err, res) => {
     console.log(err, res);
     pool.end();
@@ -64,6 +69,5 @@ ws.on('message', function incoming(data) {
     console.log(err, res);
     pool.end();
   });
-});
-});
-
+  */
+ });
