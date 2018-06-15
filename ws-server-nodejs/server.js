@@ -47,6 +47,8 @@ wss.on('connection', function (ws) {
 var lastHeight;
 var currHeight;
 var currSpeed;
+var currSpeedR;
+var currRSSI;
    ws.on('message', function incoming (eventmsg){
 	   // TEMP1|TEMP2|TEMP3|COMPASS|PRESSURE|HUMIDITY|LIGHT|CPUTEMP|ACCX|ACCY|ACCZ|COMPASSX|COMPASSY|COMPASSZ|ALTITUDE_BMP280|HEIGHT
 	   // liczymy prędkość z akceleracji
@@ -63,6 +65,7 @@ var currSpeed;
 	   var splittedMessage = eventmsg.split("|");
 	   currHeight = splittedMessage[14];
 	   currSpeedR = splittedMessage[15];
+	   currRSSI = splittedMessage[16];
 	   console.log(currHeight + "kotek" + lastHeight);
 	   currSpeed = currHeight - lastHeight;
 	   var msg = {
@@ -87,7 +90,8 @@ var currSpeed;
 				y: splittedMessage[9],
 				z: splittedMessage[10]
 			},
-		   	speed: currSpeedR
+		   	speed: currSpeedR,
+		   	rssi: currRSSI
 			
 	    };   
 	  lastHeight = splittedMessage[14];
