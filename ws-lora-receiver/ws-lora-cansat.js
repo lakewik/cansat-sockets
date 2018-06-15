@@ -27,7 +27,7 @@ sx127x.open(function(err) {
   // add a event listener for data events
   sx127x.on('data', function(data, rssi) {
     console.log('data:', '\'' + data.toString() + '\'', rssi);
-    ws.send(data.toString());
+    ws.send(data.toString()+rssi.toString()+"|");
   });
 
   // enable receive mode
