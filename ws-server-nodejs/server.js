@@ -1,9 +1,9 @@
-﻿var WebSocketServer = require('./index.js').Server;
+var WebSocketServer = require('./index.js').Server;
 var express = require('express');
 var path = require('path');
 var app = express();
 var server = require('http').createServer();
-
+const WebSocket = require('./index.js');
 app.use(express.static(path.join(__dirname, '/public')));
 
 var wss = new WebSocketServer({server: server});
@@ -21,6 +21,21 @@ function calcHeight() {
 	
 	return finalHeight;
 }
+
+wss.broadcast = function broadcast(data) {
+	wss.clients.forEach(
+
+function each(client) {
+	if (client.readyState === WebSocket.OPEN) {
+	client.send(data);
+}
+
+}
+);
+
+};
+
+//wss.broadcast
 
 wss.on('connection', function (ws) {
   console.log('started client interval');
@@ -77,8 +92,8 @@ var currSpeed;
 	    };   
 	  lastHeight = splittedMessage[14];
 	   
-	   
-	   ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
+	   wss.broadcast(JSON.stringify(msg));
+	   //ws.send(JSON.stringify(msg), function () { /* ignore errors */ });
    });
 });
 
