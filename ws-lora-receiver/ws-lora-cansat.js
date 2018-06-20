@@ -2,7 +2,7 @@ var SX127x = require('sx127x');
 const WebSocket = require('ws');
 
 var sx127x = new SX127x({
-  frequency: 433e6
+  frequency: 433930000
 });
  
 const ws = new WebSocket('ws://localhost:7777');
